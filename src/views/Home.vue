@@ -15,8 +15,9 @@
       ></v-flex>
     </v-row>
     <v-row>
-      <h1>IP: {{ ip }}</h1></v-row
-    >
+      <h1>IP: {{ ip }}</h1>
+      <h1 v-if="networkClass">IP: {{ networkClass.name }}</h1>
+    </v-row>
   </div>
 </template>
 
@@ -41,20 +42,21 @@ export default Vue.extend({
         `${this.byte1}.${this.byte2}.${this.byte3}.${this.byte4}`
       );
     },
-    networkClass(): any {
+    networkClass(): NetworkClass | null {
+      let networkClass = null;
+
       for (let i = 0; i < classes.length; i++) {
         let element = classes[i];
-        console.log("Hello pts");
 
         if (
           this.ip.byte1 > element.startAddress.byte1 &&
           this.ip.byte1 < element.endAddress.byte1
         ) {
-          return element;
-        } else {
-          return undefined;
+          networkClass = element;
         }
       }
+
+      return networkClass;
     },
   },
 });
