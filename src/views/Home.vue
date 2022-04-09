@@ -14,24 +14,48 @@
         <v-text-field label="Byte4" outlined v-model="byte4"></v-text-field
       ></v-flex>
     </v-row>
+    <v-row>
+      <h1>IP: {{ ip }}</h1></v-row
+    >
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-
+import { classes } from "@/db/data/NetworkClassData";
+import { IPAdress } from "@/db/models/IPAdress";
+import { NetworkClass } from "@/db/models/NetworkClass";
 export default Vue.extend({
   data() {
     return {
-      byte1: null,
-      byte2: null,
-      byte3: null,
-      byte4: null,
+      byte1: "" as string,
+      byte2: "" as string,
+      byte3: "" as string,
+      byte4: "" as string,
     };
   },
   name: "Home",
- computed:{
-   
- }
+  computed: {
+    ip(): IPAdress {
+      return new IPAdress(
+        `${this.byte1}.${this.byte2}.${this.byte3}.${this.byte4}`
+      );
+    },
+    networkClass(): any {
+      for (let i = 0; i < classes.length; i++) {
+        let element = classes[i];
+        console.log("Hello pts");
+
+        if (
+          this.ip.byte1 > element.startAddress.byte1 &&
+          this.ip.byte1 < element.endAddress.byte1
+        ) {
+          return element;
+        } else {
+          return undefined;
+        }
+      }
+    },
+  },
 });
 </script>
