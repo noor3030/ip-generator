@@ -1,4 +1,4 @@
-import { IPAdress } from "../models/IPAdress";
+import { IPAdress } from "./IPAdress";
 
 export type NetworkClass = {
   name: string;
