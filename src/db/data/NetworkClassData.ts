@@ -4,8 +4,8 @@
 // Class D (multicast)	1110	not defined	not defined	not defined	not defined	268,435,456 (228)	224.0.0.0	239.255.255.255	not defined	/4[7]
 // Class E (reserved)	1111	not defined	not defined	not defined	not defined	268,435,456 (228)	240.0.0
 
-import { IPAdress } from "./models/IPAdress";
-import { NetworkClass } from "./models/NetworkClass";
+import { IPAdress } from "../models/IPAdress";
+import { NetworkClass } from "../models/NetworkClass";
 
 export const classA: NetworkClass = {
   name: "Class A",

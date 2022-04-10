@@ -1,5 +1,5 @@
-import { Subnet } from "..";
-export const subnets: Array<Subnet> = [
+import { SubnetMask } from "..";
+export const subnets: Array<SubnetMask> = [
   { subnet: 1, host: 256, subnetMask: "/24" },
   { subnet: 2, host: 128, subnetMask: "/25" },
   { subnet: 4, host: 64, subnetMask: "/26" },

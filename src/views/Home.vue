@@ -6,23 +6,44 @@
         :port="port"
         :on-change="change"
         theme="material"
-      ></vue-ip
-    ></v-row>
+      ></vue-ip>
+    </v-row>
+    <v-row justify="center">
+      <v-col cols="2"
+        ><v-text-field
+          label="عدد الشبكات الفرعية"
+          outlined
+          v-model="subnetsCount"
+        ></v-text-field>
+        <v-btn class="primary" @click="generate">Generate</v-btn></v-col
+      >
+    </v-row>
     <v-row>
       <h1>IP: {{ ipAddress }}</h1>
       <h1 v-if="networkClass">IP: {{ networkClass.name }}</h1>
     </v-row>
-    <v-data-table :headers="headers" class="elevation-1 mt-10" :items-per-page="5" ></v-data-table>
+    <v-data-table
+      :headers="headers"
+      class="elevation-1 mt-10"
+      :items-per-page="5"
+    ></v-data-table>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import VueIp from "vue-ip";
-import { networkClasses, NetworkClass, IPAdress, subnets } from "@/db";
+import {
+  networkClasses,
+  NetworkClass,
+  IPAdress,
+  subnets,
+  generateSubnets,
+} from "@/db";
 export default Vue.extend({
   data() {
     return {
+      subnetsCount: 0,
       ip: "127.0.0.1",
       port: "8888",
       headers: [
@@ -59,6 +80,9 @@ export default Vue.extend({
   methods: {
     change(ip: string, port: string, valid: boolean) {
       console.log(ip, port, valid);
+    },
+    generate() {
+      generateSubnets(this.ipAddress, this.subnetsCount);
     },
   },
   components: {
