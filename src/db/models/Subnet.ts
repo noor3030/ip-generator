@@ -1,10 +1,8 @@
-import { IPAdress } from "./IPAdress";
-
 export type Subnet = {
-  networkId: IPAdress;
+  networkId: string;
   subnetMask: string;
-  hostIdRangeStart: IPAdress;
-  hostIdRangeEnd: IPAdress;
+  hostIdRangeStart: string;
+  hostIdRangeEnd: string;
   ofUsableHost: number;
-  broadcastHost: IPAdress;
+  broadcastHost: string;
 };

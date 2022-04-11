@@ -24,8 +24,8 @@
     </v-col>
     <v-data-table
       :headers="headers"
+      :items="subnets"
       class="elevation-1 mt-10"
-      :items-per-page="5"
     ></v-data-table>
   </div>
 </template>
@@ -39,6 +39,7 @@ import {
   IPAdress,
   subnets,
   generateSubnets,
+  Subnet,
 } from "@/db";
 export default Vue.extend({
   data() {
@@ -46,13 +47,8 @@ export default Vue.extend({
       subnetsCount: 0,
       ip: "127.0.0.1",
       port: "8888",
-      headers: [
-        { text: "Network ID", value: "" },
-        { text: "Subnet Mask", value: "" },
-        { text: "Host ID Range", value: "" },
-        { text: "# of Usable Host", value: "" },
-        { text: "Broadcast Host", value: "" },
-      ],
+      subnets: [] as Array<Subnet>,
+      headers: [{ text: "Network ID", value: "networkId" }],
     };
   },
   name: "Home",
@@ -81,11 +77,11 @@ export default Vue.extend({
     change(ip: string, port: string, valid: boolean) {
       this.ip = ip;
       console.log(this.ipAddress.isValid);
-      
+
       console.log(ip, port, valid);
     },
     generate() {
-      generateSubnets(this.ipAddress, this.subnetsCount);
+      this.subnets = generateSubnets(this.ipAddress, this.subnetsCount);
     },
   },
   components: {
