@@ -8,7 +8,7 @@ import { IPAdress } from "../models/IPAdress";
 import { NetworkClass } from "../models/NetworkClass";
 
 export const classA: NetworkClass = {
-  name: "Class A",
+  name: "A",
   leadingBits: 0,
   sizeOfNetworkNumberBitField: 8,
   sizeOfRestBitField: 24,
@@ -22,7 +22,7 @@ export const classA: NetworkClass = {
 };
 
 export const classB: NetworkClass = {
-  name: "Class B",
+  name: "B",
   leadingBits: 10,
   sizeOfNetworkNumberBitField: 16,
   sizeOfRestBitField: 16,
@@ -35,7 +35,7 @@ export const classB: NetworkClass = {
   cidr: "/16",
 };
 export const classC: NetworkClass = {
-  name: "Class C",
+  name: "C",
   leadingBits: 110,
   sizeOfNetworkNumberBitField: 24,
   sizeOfRestBitField: 8,
@@ -48,7 +48,7 @@ export const classC: NetworkClass = {
   cidr: "/24",
 };
 export const classD: NetworkClass = {
-  name: "Class D",
+  name: "D",
   leadingBits: 1110,
   sizeOfNetworkNumberBitField: undefined,
   sizeOfRestBitField: undefined,
@@ -62,7 +62,7 @@ export const classD: NetworkClass = {
 };
 
 export const classE: NetworkClass = {
-  name: "Class E",
+  name: "E",
   leadingBits: 1111,
   sizeOfNetworkNumberBitField: undefined,
   sizeOfRestBitField: undefined,

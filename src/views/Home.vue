@@ -18,10 +18,10 @@
         <v-btn class="primary" @click="generate">Generate</v-btn></v-col
       >
     </v-row>
-    <v-row>
-      <h1>IP: {{ ipAddress }}</h1>
-      <h1 v-if="networkClass">IP: {{ networkClass.name }}</h1>
-    </v-row>
+    <v-col>
+      <h1>IP: {{ ipAddress.ip }}</h1>
+      <h1 v-if="networkClass">Class: {{ networkClass.name }}</h1>
+    </v-col>
     <v-data-table
       :headers="headers"
       class="elevation-1 mt-10"
@@ -67,8 +67,8 @@ export default Vue.extend({
         let element = networkClasses[i];
 
         if (
-          this.ipAddress.byte1 > element.startAddress.byte1 &&
-          this.ipAddress.byte1 < element.endAddress.byte1
+          this.ipAddress.byte1 >= element.startAddress.byte1 &&
+          this.ipAddress.byte1 <= element.endAddress.byte1
         ) {
           networkClass = element;
         }
@@ -79,6 +79,9 @@ export default Vue.extend({
   },
   methods: {
     change(ip: string, port: string, valid: boolean) {
+      this.ip = ip;
+      console.log(this.ipAddress.isValid);
+      
       console.log(ip, port, valid);
     },
     generate() {
