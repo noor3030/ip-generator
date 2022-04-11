@@ -7,33 +7,34 @@ export function generateSubnets(
   ip: IPAdress,
   subnetsCount: number
 ): Array<Subnet> {
-  const subnetsAddress = [];
-  let subnet: SubnetMask = null;
+  const subnetsAddress: Array<Subnet> = [];
 
-  console.log(subnetsCount);
-  subnet = getHost(subnet);
-  console.log("near " + subnet.subnet);
-  console.log(subnet);
+  const subnet: SubnetMask = getSubnetMask(subnetsCount)!;
 
-  for (let i = 0; i < subnet.subnet; i++) {
+  const totalNetworks: number = 256 / subnet.subnet - 1;
+
+  for (let i = 0; i < totalNetworks; i++) {
     subnetsAddress.push({
       networkId: `192.168.0.${i * subnet.subnet}`,
-      subnetMask: "",
+      subnetMask: subnet.subnetMask,
       hostIdRangeStart: "192.168.0.0",
       hostIdRangeEnd: "192.168.0.0",
       ofUsableHost: 2,
       broadcastHost: "192.168.0.0",
-    } as Subnet);
+    });
   }
 
   return subnetsAddress;
 }
 
-function getHost(subnet: number): SubnetMask {
+export function getSubnetMask(subnet: number): SubnetMask | null {
+  let subnetMask: SubnetMask | null = null;
   for (let i = 0; i < subnets.length; i++) {
     const element = subnets[i];
     if (subnet <= element.subnet) {
-      return element;
+      subnetMask = element;
+      break;
     }
   }
+  return subnetMask;
 }

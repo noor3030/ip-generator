@@ -21,11 +21,14 @@
     <v-col>
       <h1>IP: {{ ipAddress.ip }}</h1>
       <h1 v-if="networkClass">Class: {{ networkClass.name }}</h1>
+      <h1 v-if="subnet">{{ subnetsCount }} -> {{ subnet.subnet }}</h1>
     </v-col>
     <v-data-table
       :headers="headers"
       :items="subnets"
       class="elevation-1 mt-10"
+      hide-default-footer
+      disable-pagination
     ></v-data-table>
   </div>
 </template>
@@ -40,15 +43,22 @@ import {
   subnets,
   generateSubnets,
   Subnet,
+  SubnetMask,
+  getSubnetMask,
 } from "@/db";
 export default Vue.extend({
   data() {
     return {
+      subnet: null as SubnetMask | null,
       subnetsCount: 0,
       ip: "127.0.0.1",
       port: "8888",
       subnets: [] as Array<Subnet>,
-      headers: [{ text: "Network ID", value: "networkId" }],
+      headers: [{ text: "Network ID", value: "networkId" },
+      { text: "Subnet Mask", value: "subnetMask" },
+      
+      
+      ],
     };
   },
   name: "Home",
@@ -82,6 +92,7 @@ export default Vue.extend({
     },
     generate() {
       this.subnets = generateSubnets(this.ipAddress, this.subnetsCount);
+      this.subnet = getSubnetMask(this.subnetsCount);
     },
   },
   components: {
