@@ -27,4 +27,8 @@ export class IPAdress {
   public get byte4(): number {
     return Number(this.bytes[3]);
   }
+
+  changeLastByte(byte4: number): string {
+    return `${this.byte1}.${this.byte2}.${this.byte3}.${byte4}`;
+  }
 }

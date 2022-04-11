@@ -9,7 +9,7 @@
       ></vue-ip>
     </v-row>
     <v-row justify="center">
-      <v-col cols="2"
+      <v-col cols="2" 
         ><v-text-field
           label="عدد الشبكات الفرعية"
           outlined
@@ -21,7 +21,9 @@
     <v-col>
       <h1>IP: {{ ipAddress.ip }}</h1>
       <h1 v-if="networkClass">Class: {{ networkClass.name }}</h1>
-      <h1 v-if="subnet">{{ subnetsCount }} -> {{ subnet.subnet }}</h1>
+      <h1 v-if="subnet">Subnet: {{ subnetsCount }} -> {{ subnet.subnet }}</h1>
+      <h1 v-if="subnet">Host: {{ subnet.host }}</h1>
+      <h1 v-if="subnet">Subnet Mask: {{ subnet.subnetMask }}</h1>
     </v-col>
     <v-data-table
       :headers="headers"
@@ -54,10 +56,13 @@ export default Vue.extend({
       ip: "127.0.0.1",
       port: "8888",
       subnets: [] as Array<Subnet>,
-      headers: [{ text: "Network ID", value: "networkId" },
-      { text: "Subnet Mask", value: "subnetMask" },
-      
-      
+      headers: [
+        { text: "Network ID", value: "networkId" },
+        { text: "Subnet Mask", value: "subnetMask" },
+        { text: "Host ID Range Start", value: "hostIdRangeStart" },
+        { text: "Host ID Range End", value: "hostIdRangeEnd" },
+        { text: "# of Usable Host", value: "ofUsableHost" },
+        { text: "Broadcast Host", value: "broadcastHost" },
       ],
     };
   },

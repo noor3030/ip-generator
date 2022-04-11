@@ -11,16 +11,19 @@ export function generateSubnets(
 
   const subnet: SubnetMask = getSubnetMask(subnetsCount)!;
 
-  const totalNetworks: number = 256 / subnet.subnet - 1;
+  const totalNetworks: number = subnet.subnet - 1;
 
-  for (let i = 0; i < totalNetworks; i++) {
+  const usableHosts: number = subnet.host - 2;
+
+  for (let i = 0; i <= totalNetworks; i++) {
+    const currentHost: number = i * subnet.host;
     subnetsAddress.push({
-      networkId: `192.168.0.${i * subnet.subnet}`,
+      networkId: ip.changeLastByte(currentHost),
       subnetMask: subnet.subnetMask,
-      hostIdRangeStart: "192.168.0.0",
-      hostIdRangeEnd: "192.168.0.0",
-      ofUsableHost: 2,
-      broadcastHost: "192.168.0.0",
+      hostIdRangeStart: ip.changeLastByte(currentHost + 1),
+      hostIdRangeEnd: ip.changeLastByte(currentHost + usableHosts),
+      ofUsableHost: usableHosts,
+      broadcastHost: ip.changeLastByte(currentHost + subnet.host - 1),
     });
   }
 
@@ -28,13 +31,17 @@ export function generateSubnets(
 }
 
 export function getSubnetMask(subnet: number): SubnetMask | null {
-  let subnetMask: SubnetMask | null = null;
-  for (let i = 0; i < subnets.length; i++) {
-    const element = subnets[i];
-    if (subnet <= element.subnet) {
-      subnetMask = element;
-      break;
+  if (subnet < 255) {
+    let subnetMask: SubnetMask | null = null;
+    for (let i = 0; i < subnets.length; i++) {
+      const element = subnets[i];
+      if (subnet <= element.subnet) {
+        subnetMask = element;
+        break;
+      }
     }
+    return subnetMask;
+  } else {
+    return subnets[subnets.length - 1];
   }
-  return subnetMask;
 }
