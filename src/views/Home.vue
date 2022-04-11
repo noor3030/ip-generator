@@ -9,22 +9,28 @@
       ></vue-ip>
     </v-row>
     <v-row justify="center">
-      <v-col cols="2" 
+      <v-col cols="12" sm="3" align="center"
         ><v-text-field
-          label="عدد الشبكات الفرعية"
+          label="عدد الشبكات"
           outlined
           v-model="subnetsCount"
         ></v-text-field>
         <v-btn class="primary" @click="generate">Generate</v-btn></v-col
       >
     </v-row>
-    <v-col>
-      <h1>IP: {{ ipAddress.ip }}</h1>
-      <h1 v-if="networkClass">Class: {{ networkClass.name }}</h1>
-      <h1 v-if="subnet">Subnet: {{ subnetsCount }} -> {{ subnet.subnet }}</h1>
-      <h1 v-if="subnet">Host: {{ subnet.host }}</h1>
-      <h1 v-if="subnet">Subnet Mask: {{ subnet.subnetMask }}</h1>
-    </v-col>
+    <v-row justify="center">
+      <v-col cols="12" sm="3" align="center">
+        <v-card class="pa-3">
+          <h3>IP: {{ ipAddress.ip }}</h3>
+          <h3 v-if="networkClass">Class: {{ networkClass.name }}</h3>
+          <h3 v-if="subnet">
+            Subnet: {{ subnetsCount }} -> {{ subnet.subnet }}
+          </h3>
+          <h3 v-if="subnet">Host: {{ subnet.host }}</h3>
+          <h3 v-if="subnet">Subnet Mask: {{ subnet.subnetMask }}</h3>
+        </v-card>
+      </v-col>
+    </v-row>
     <v-data-table
       :headers="headers"
       :items="subnets"
