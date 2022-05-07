@@ -1,5 +1,7 @@
 module.exports = {
-  transpileDependencies: [
-    'vuetify'
-  ]
-}
+  transpileDependencies: ["vuetify"],
+  pwa: {
+    name: "cs timetable",
+    themeColor: "#000000",
+  },
+};

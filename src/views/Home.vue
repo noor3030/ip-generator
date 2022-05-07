@@ -23,6 +23,9 @@
         <v-card class="pa-3">
           <h3>IP: {{ ipAddress.ip }}</h3>
           <h3 v-if="networkClass">Class: {{ networkClass.name }}</h3>
+          <h3 v-if="networkClass">
+            Subnet Mask: {{ networkClass.subnetMask }}
+          </h3>
           <h3 v-if="subnet">
             Subnet: {{ subnetsCount }} -> {{ subnet.subnet }}
           </h3>
@@ -48,7 +51,6 @@ import {
   networkClasses,
   NetworkClass,
   IPAdress,
-  subnets,
   generateSubnets,
   Subnet,
   SubnetMask,

@@ -4,4 +4,4 @@ export type { NetworkClass } from "./models/NetworkClass";
 export type { Subnet } from "./models/Subnet";
 export type { SubnetMask } from "./models/SubnetMask";
 export { IPAdress } from "./models/IPAdress";
-export { generateSubnets, getSubnetMask} from "./GenerateSubnets";
+export { generateSubnets, getSubnetMask } from "./GenerateSubnets";
